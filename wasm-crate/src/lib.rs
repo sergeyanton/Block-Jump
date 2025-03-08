@@ -1,6 +1,10 @@
-use wasm_bindgen::prelude::*;
+mod game;
+mod spike;
 
-#[wasm_bindgen]
-pub fn hello(name: &str) -> String {
-    format!("Hello, {}!", name)
+pub use game::Game;
+pub use spike::Spike;
+
+#[wasm_bindgen::prelude::wasm_bindgen(start)]
+pub fn start() {
+    console_error_panic_hook::set_once();
 }

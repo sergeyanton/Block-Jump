@@ -1,0 +1,10 @@
+/csse/users/san177/Documents/Y4/COSC473/wasm-assignment/wasm-crate/target/wasm32-unknown-unknown/release/deps/libnum_complex-c39c44229761fd6b.rmeta: /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/lib.rs /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/cast.rs /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/pow.rs /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/complex_float.rs
+
+/csse/users/san177/Documents/Y4/COSC473/wasm-assignment/wasm-crate/target/wasm32-unknown-unknown/release/deps/libnum_complex-c39c44229761fd6b.rlib: /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/lib.rs /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/cast.rs /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/pow.rs /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/complex_float.rs
+
+/csse/users/san177/Documents/Y4/COSC473/wasm-assignment/wasm-crate/target/wasm32-unknown-unknown/release/deps/num_complex-c39c44229761fd6b.d: /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/lib.rs /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/cast.rs /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/pow.rs /csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/complex_float.rs
+
+/csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/lib.rs:
+/csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/cast.rs:
+/csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/pow.rs:
+/csse/users/san177/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-complex-0.4.6/src/complex_float.rs:
