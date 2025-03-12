@@ -10,7 +10,7 @@ pub struct Spike {
     height: f64,
     speed: f64,
 }
-
+// asd
 #[wasm_bindgen]
 impl Spike {
     #[wasm_bindgen(constructor)]
