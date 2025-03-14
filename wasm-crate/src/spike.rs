@@ -10,7 +10,7 @@ pub struct Spike {
     height: f64,
     speed: f64,
 }
-
+// asd
 #[wasm_bindgen]
 impl Spike {
     #[wasm_bindgen(constructor)]
@@ -34,7 +34,6 @@ impl Spike {
     pub fn render(&self, crc: &CanvasRenderingContext2d) {
         crc.set_fill_style_str(&"green");
         
-        // Draw a triangle for the spike
         crc.begin_path();
         crc.move_to(self.position.x, self.position.y + self.height);
         crc.line_to(self.position.x + self.width / 2.0, self.position.y);

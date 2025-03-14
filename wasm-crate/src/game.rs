@@ -1,4 +1,4 @@
-use std::ops::Mul;
+use std::ops::Div;
 
 use rand::Rng;
 use wasm_bindgen::prelude::*;
@@ -13,13 +13,13 @@ pub struct Game {
     gravity: f64,
     is_grounded: bool,
     spikes: Vec<Spike>,
-    spawn_timer: u32,
+    spawn_timer: f64,
     canvas_width: f64,
     canvas_height: f64,
     game_over: bool,
     player_height: f64,
     player_width: f64,
-    score: f32,
+    score: f64,
 }
 
 #[wasm_bindgen]
@@ -33,13 +33,13 @@ impl Game {
             gravity: 0.5,
             is_grounded: true,
             spikes: Vec::new(),
-            spawn_timer: 0,
+            spawn_timer: 0.0,
             canvas_width: 800.0,
             canvas_height: 400.0,
             game_over: false,
             player_height: 20.0,
             player_width: 20.0,
-            score: 0,
+            score: 0.0,
         }
     }
     
@@ -68,13 +68,13 @@ impl Game {
         self.spikes.retain(|spike| spike.is_visible());
 
         // Spawn new spikes
-        self.spawn_timer += 1;
-        self.score += 1;
+        self.spawn_timer += 1.0;
+        self.score += 1.0;
         // web_sys::console::log_1(&format!("Spawn timer: {}", self.spawn_timer).into());
-        if self.spawn_timer >= 120 { // Spawn every 120 frames
+        if self.spawn_timer >= 120.0 { // Spawn every 120 frames
             web_sys::console::log_1(&"Attempting to spawn spike".into());
             self.spawn_spike();
-            self.spawn_timer = 0;
+            self.spawn_timer = 0.0;
         }
 
         // Check for spike collisions
@@ -120,7 +120,7 @@ impl Game {
 
         let spike_width = rng.random_range(10.0..30.0);
         let spike_height = rng.random_range(10.0..30.0);
-        let spike_speed = self.score; // need to make change with survivaal time
+        let spike_speed = self.score.div(100.0); // need to make change with survivaal time
         let new_spike = Spike::new(
             self.canvas_width, 
             self.canvas_height - spike_height,
