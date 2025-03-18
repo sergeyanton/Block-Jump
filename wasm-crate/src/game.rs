@@ -1,4 +1,3 @@
-use std::ops::Div;
 
 use rand::Rng;
 use wasm_bindgen::prelude::*;
@@ -43,7 +42,9 @@ impl Game {
         }
     }
     
-    pub fn update(&mut self) {
+    pub fn update(&mut self, delta_time: f64) {
+        
+
         self.velocity.y += self.gravity;
         
         self.position += self.velocity;
@@ -59,7 +60,6 @@ impl Game {
         web_sys::console::log_1(&format!("Position: ({}, {}), Velocity: ({}, {}), Grounded: {}", 
             self.position.x, self.position.y, self.velocity.x, self.velocity.y, self.is_grounded).into());
 
-        // Update spikes
         for spike in &mut self.spikes {
             spike.update();
         }
@@ -67,17 +67,19 @@ impl Game {
         // Remove off-screen spikes
         self.spikes.retain(|spike| spike.is_visible());
 
-        // Spawn new spikes
         self.spawn_timer += 1.0;
-        self.score += 1.0;
-        // web_sys::console::log_1(&format!("Spawn timer: {}", self.spawn_timer).into());
-        if self.spawn_timer >= 120.0 { // Spawn every 120 frames
+        self.score += delta_time * 60.0;
+
+        let difficulty = 2.0; 
+        let spawn_interval = ((200.0 / difficulty) - (self.score / (100.0 / difficulty))).max(60.0 / difficulty);
+        
+        if self.spawn_timer >= spawn_interval && !self.game_over {
             web_sys::console::log_1(&"Attempting to spawn spike".into());
             self.spawn_spike();
             self.spawn_timer = 0.0;
         }
 
-        // Check for spike collisions
+        
         if self.check_spike_collisions() {
             self.game_over = true;
         }
@@ -101,9 +103,12 @@ impl Game {
         crc.set_fill_style_str(&"black");
         crc.fill_rect(0.0, 400.0, 800.0, 20.0);
         
-        // Render spikes
-        for spike in &self.spikes {
-            spike.render(crc);
+        // Only render spikes if the game is not over
+        if !self.game_over {
+            // Render spikes
+            for spike in &self.spikes {
+                spike.render(crc);
+            }
         }
         
         // Draw character block
@@ -113,14 +118,52 @@ impl Game {
         // Small text above the player to show the position
         crc.set_fill_style_str(&"black");
         let _ = crc.fill_text(&format!("({:.1}, {:.1})", self.position.x, self.position.y), self.position.x, self.position.y - 5.0);
+        
+        // Display game over message if game is over
+        if self.game_over {
+            crc.set_font("30px Arial");
+            crc.set_fill_style_str("red");
+            crc.set_text_align("center");
+            let _ = crc.fill_text("Game Over", self.canvas_width / 2.0, self.canvas_height / 2.0);
+            
+            // Display score
+            crc.set_font("20px Arial");
+            let _ = crc.fill_text(&format!("Score: {:.0}", self.score), self.canvas_width / 2.0, self.canvas_height / 2.0 + 40.0);
+            
+            // Display restart instruction
+            crc.set_font("16px Arial");
+            let _ = crc.fill_text("Press 'R' to restart", self.canvas_width / 2.0, self.canvas_height / 2.0 + 70.0);
+        } else {
+            // Display current score during gameplay
+            crc.set_font("16px Arial");
+            crc.set_fill_style_str("black");
+            crc.set_text_align("left");
+            let _ = crc.fill_text(&format!("Score: {:.0}", self.score), 10.0, 20.0);
+        }
+    }
+
+    pub fn restart(&mut self) {
+        if self.game_over {
+            self.position = Vector2::new(50.0, 80.0);
+            self.velocity = Vector2::new(0.0, 0.0);
+            self.is_grounded = true;
+            self.spikes.clear();
+            self.spawn_timer = 0.0;
+            self.game_over = false;
+            self.score = 0.0;
+        }
     }
 
     pub fn spawn_spike(&mut self) {
         let mut rng = rand::rng();
 
-        let spike_width = rng.random_range(10.0..30.0);
-        let spike_height = rng.random_range(10.0..30.0);
-        let spike_speed = self.score.div(100.0); // need to make change with survivaal time
+        let spike_width = rng.random_range(10.0..50.0); 
+        let spike_height = rng.random_range(10.0..50.0);
+
+        let base_speed = 3.0;
+        let speed_increment = (self.score / 1000.0).min(5.0); 
+        let spike_speed = base_speed + speed_increment;
+        
         let new_spike = Spike::new(
             self.canvas_width, 
             self.canvas_height - spike_height,

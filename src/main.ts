@@ -7,17 +7,32 @@ async function run() {
   const crc = canvas.getContext("2d")!;
 
   const game = new Game();
-
+  
   document.addEventListener('keydown', (e) => {
     if (e.code === 'Space') {
       game.jump();
     }
-    
   });
 
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+        game.jump();
+    }
+    if (e.code === 'KeyR') {
+        game.restart();
+    }
+});
+
+  let lastTime = performance.now();
+
   function gameLoop() {
-    game.update();
+    const now = performance.now();
+    const deltaTime = (now - lastTime) / 1000; // Convert to seconds
+    lastTime = now;
+
+    game.update(deltaTime);  // Pass delta time to update()
     game.render(crc);
+
     requestAnimationFrame(gameLoop);
   }
 
