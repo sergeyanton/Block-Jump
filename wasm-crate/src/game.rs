@@ -70,12 +70,6 @@ impl Game {
         let spawn_interval =
             ((200.0 / difficulty) - (self.score / (100.0 / difficulty))).max(60.0 / difficulty);
 
-        if self.spawn_timer >= spawn_interval {
-            web_sys::console::log_1(&"Attempting to spawn spike".into());
-            self.spawn_spike();
-            self.spawn_timer = 0.0;
-        }
-
         if self.check_spike_collisions() {
             self.game_over = true;
         }
@@ -167,14 +161,6 @@ impl Game {
             spike_speed,
         );
         self.spikes.push(new_spike);
-
-        web_sys::console::log_1(
-            &format!(
-                "Spike spawned: width={}, height={}, speed={}",
-                spike_width, spike_height, spike_speed
-            )
-            .into(),
-        );
     }
 
     // I think this is like bounding box collision detection, I hope it works...
