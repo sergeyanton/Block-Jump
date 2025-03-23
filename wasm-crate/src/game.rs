@@ -70,6 +70,11 @@ impl Game {
         let spawn_interval =
             ((200.0 / difficulty) - (self.score / (100.0 / difficulty))).max(60.0 / difficulty);
 
+        if self.spawn_timer >= spawn_interval {
+            self.spawn_spike();
+            self.spawn_timer = 0.0;
+        }
+
         if self.check_spike_collisions() {
             self.game_over = true;
         }
