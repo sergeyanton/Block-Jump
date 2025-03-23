@@ -1,4 +1,6 @@
-Potential ideas:
-- use https://deviltearbasil.itch.io/female-character-sidescroller-template for character sprite
-- use for parallax background https://kelench.itch.io/free-background-paralax
+# COSC473 Wasm Widget Assignment - Block Jump
+
+- To get started clone the repository.
+- Once opened, run `npm install`
+- Then use terminal to navigate to the `wasm-crate` folder and run `wasm-pack build --target web --out-dir ../public/wasm`
 - To start run `npm run dev`
