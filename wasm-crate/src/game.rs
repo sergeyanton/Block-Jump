@@ -57,18 +57,6 @@ impl Game {
             self.is_grounded = false;
         }
 
-        web_sys::console::log_1(
-            &format!(
-                "Position: ({}, {}), Velocity: ({}, {}), Grounded: {}",
-                self.position.x,
-                self.position.y,
-                self.velocity.x,
-                self.velocity.y,
-                self.is_grounded
-            )
-            .into(),
-        );
-
         for spike in &mut self.spikes {
             spike.update();
         }
