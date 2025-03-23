@@ -27,16 +27,16 @@ async function run() {
 
   function gameLoop() {
     const now = performance.now();
-    const deltaTime = (now - lastTime) / 1000; // Convert to seconds
+    const deltaTime = (now - lastTime) / 1000; 
     lastTime = now;
 
-    game.update(deltaTime);  // Pass delta time to update()
+    game.update(deltaTime); 
     game.render(crc);
 
     requestAnimationFrame(gameLoop);
   }
 
-  gameLoop(); // Start loop
+  gameLoop(); 
 }
 
 run();

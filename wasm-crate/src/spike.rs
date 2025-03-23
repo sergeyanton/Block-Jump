@@ -1,7 +1,7 @@
+// Logic for the spike object
+use nalgebra::Vector2;
 use wasm_bindgen::prelude::*;
 use web_sys::CanvasRenderingContext2d;
-use nalgebra::Vector2;
-
 
 #[wasm_bindgen]
 pub struct Spike {
@@ -10,7 +10,6 @@ pub struct Spike {
     height: f64,
     speed: f64,
 }
-// asd
 #[wasm_bindgen]
 impl Spike {
     #[wasm_bindgen(constructor)]
@@ -33,7 +32,7 @@ impl Spike {
 
     pub fn render(&self, crc: &CanvasRenderingContext2d) {
         crc.set_fill_style_str(&"green");
-        
+
         crc.begin_path();
         crc.move_to(self.position.x, self.position.y + self.height);
         crc.line_to(self.position.x + self.width / 2.0, self.position.y);
@@ -53,6 +52,4 @@ impl Spike {
     pub fn get_height(&self) -> f64 {
         self.height
     }
-
-// test 
 }

@@ -1,3 +1,4 @@
+// Main entry point for the wasm module
 mod game;
 mod spike;
 
